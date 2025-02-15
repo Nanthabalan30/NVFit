@@ -1,0 +1,30 @@
+/* Ensure the body and html take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Flex container to make header and footer fixed */
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Header styling */
+app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure header stays above other content */
+}
+
+/* Footer styling */
+app-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000; /* Ensure footer stays above other content */
+}
+
+/* Scrollable content area */
+.overflow-auto {
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex-grow: 1; /* Allow content to grow and fill remaining space */
+}

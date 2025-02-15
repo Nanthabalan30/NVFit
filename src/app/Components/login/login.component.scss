@@ -1,0 +1,18 @@
+
+/* Ensure the div takes full height */
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Background image class */
+.background-image {
+  background-image: url('/imgs/gymbackground.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Default background (if no image is applied) */
+body {
+  background-color: #f8f9fa; /* Default background color */
+}

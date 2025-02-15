@@ -1,0 +1,43 @@
+<div class="min-vh-100 d-flex align-items-center" [ngClass]="{'background-image': hasContent}">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <!-- Welcome Section (Left Side) -->
+      <div *ngIf="hasContent" class="col-lg-6 text-center text-white">
+        <h1>Welcome to NVFIT</h1>
+        <p>Your journey to fitness starts here.</p>
+        <button class="btn btn-primary">Get Started</button>
+      </div>
+
+      <!-- Login Card (Right Side) -->
+      <div class="col-lg-5">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded animate__animated animate__fadeIn">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Login</h3>
+            <form>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+              <div class="text-center mt-3">
+                <a href="#" class="text-muted">Forgot password?</a>
+              </div>
+            </form>
+            <hr>
+            <div class="text-center">
+              <p class="mb-0">Don't have an account? <a href="#" class="text-primary">Sign up</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

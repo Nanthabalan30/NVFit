@@ -1,39 +1,138 @@
-<div class="min-vh-100 d-flex align-items-center" [ngClass]="{'background-image': hasContent}">
+<div class="min-vh-100 d-flex align-items-center justify-content-center background-overlay"
+  [ngClass]="{'background-image': hasContent}">
   <div class="container">
-    <div class="row justify-content-between align-items-center">
-      <!-- Welcome Section (Left Side) -->
-      <div *ngIf="hasContent" class="col-lg-6 text-center text-white">
-        <h1>Welcome to NVFIT</h1>
-        <p>Your journey to fitness starts here.</p>
-        <button class="btn btn-primary">Get Started</button>
+    <div class="row justify-content-center">
+
+      <!-- Welcome Section (Shown Only for Register) -->
+      <div *ngIf="hasContent" class="col-lg-5 text-center text-white animate__animated animate__fadeInLeft">
+        <h1 class="display-4 fw-bold">Welcome to NVFIT</h1>
+        <p class="lead">Your journey to fitness starts here.</p>
+        <button class="btn btn-primary btn-lg mt-3 animate__animated animate__pulse animate__infinite">Get
+          Started</button>
       </div>
 
-      <!-- Login Card (Right Side) -->
+      <!-- Login/Register Card -->
       <div class="col-lg-5">
-        <div class="card shadow-lg p-3 mb-5 bg-white rounded animate__animated animate__fadeIn">
+        <div class="card shadow-lg p-4 rounded animate__animated animate__fadeIn">
           <div class="card-body">
-            <h3 class="card-title text-center mb-4">Login</h3>
-            <form>
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
-              </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
-              <div class="text-center mt-3">
-                <a href="#" class="text-muted">Forgot password?</a>
-              </div>
-            </form>
+            <h3 class="card-title text-center mb-4 fw-bold">{{ isLogin ? 'Login' : 'Register' }}</h3>
+
+            <ng-container *ngIf="isLogin; else registerForm2">
+              <form [formGroup]="loginForm">
+
+                <!-- Email Input -->
+                <div class="form-group mb-3">
+                  <input type="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-group mb-3 position-relative">
+                  <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                    placeholder="Enter your password" required>
+                  <i class="fa fa-eye toggle-password" (click)="togglePassword()"
+                    [ngClass]="{'fa-eye-slash': showPassword}"></i>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                  </div>
+                  <a href="#" class="text-muted text-decoration-none">Forgot password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button class="btn btn-primary w-100 btn-lg">Login</button>
+
+              </form>
+
+
+            </ng-container>
+
+            <ng-template #registerForm2>
+              <form [formGroup]="registerForm">
+
+                <div class="row">
+                  <!-- First Name & Last Name -->
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" placeholder="First Name" required formControlName="firstName">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" placeholder="Last Name" required formControlName="lastName">
+                  </div>
+  
+                  <!-- Phone Number -->
+                  <div class="col-md-8 mb-3">
+                    <div class="input-group">
+                      <select class="form-select cursor-pointer w-25" formControlName="countryCode">
+                        <option value="+1">+1 (USA)</option>
+                        <option value="+44">+44 (UK)</option>
+                        <option value="+91">+91 (India)</option>
+                      </select>
+                      <input type="text" class="form-control w-50" placeholder="Phone Number" required formControlName="phoneNo">
+                    </div>
+                  </div>
+  
+                  <!-- Age -->
+                  <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" placeholder="Age" required formControlName="age">
+                  </div>
+  
+                  <!-- Gender -->
+                  <div class="col-12 mb-3">
+                    <div class="d-flex gap-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="Male" formControlName="gender">
+                        <label class="form-check-label">Male</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="Female" formControlName="gender">
+                        <label class="form-check-label">Female</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="Other" formControlName="gender">
+                        <label class="form-check-label">Other</label>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <!-- Username -->
+                  <div class="col-12 mb-3">
+                    <input type="text" class="form-control" placeholder="Username" required formControlName="username">
+                  </div>
+  
+                  <!-- Password -->
+                  <div class="col-12 mb-3 position-relative">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password"
+                      required>
+                    <i class="fa fa-eye toggle-password" (click)="togglePassword()"
+                      [ngClass]="{'fa-eye-slash': showPassword}"></i>
+                  </div>
+  
+                  <!-- Confirm Password -->
+                  <div class="col-12 mb-3">
+                    <input type="password" class="form-control" placeholder="Confirm Password" required formControlName="confirmPassword">
+                  </div>
+  
+                  <!-- Register Button -->
+                  <button class="btn btn-primary w-100 btn-lg" (click)="onSubmit()">Register</button>
+                </div>
+
+
+              </form>
+       
+            </ng-template>
+
+            <!-- Toggle Between Login and Register -->
             <hr>
             <div class="text-center">
-              <p class="mb-0">Don't have an account? <a href="#" class="text-primary">Sign up</a></p>
+              <p class="mb-0">
+                {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
+                <a class="text-primary cursor-pointer text-decoration-none" (click)="toggleLogin()">
+                  {{ isLogin ? "Sign Up" : "Login" }}
+                </a>
+              </p>
             </div>
           </div>
         </div>
